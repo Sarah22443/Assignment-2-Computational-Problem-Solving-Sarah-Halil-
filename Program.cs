@@ -10,7 +10,7 @@ namespace Programming_Assignment_2_Summer_2021
         {
             //Question1:
             Console.WriteLine("Question 1");
-            int[] nums1 = {1, 2, 2, 1};
+            int[] nums1 = { 1, 2, 2, 1 };
             int[] nums2 = { 2, 2 };
             Intersection(nums1, nums2);
             Console.WriteLine("");
@@ -46,10 +46,7 @@ namespace Programming_Assignment_2_Summer_2021
             //Question 5
 
             Console.WriteLine("Question 5");
-            List<List<string>> cities = new List<List<string>>();
-            cities.Add(new List<string>() { "London", "New York" });
-            cities.Add(new List<string>() { "New York", "Tampa" });
-            cities.Add(new List<string>() { "Delhi", "London" });
+            string[,] cities = { { "London", "New York" }, { "New York", "Tampa" }, { "Delhi", "London" } };
             string Dcity = DestCity(cities);
             Console.WriteLine("Destination City for Given Route is : {0}", Dcity);
 
@@ -115,10 +112,10 @@ namespace Programming_Assignment_2_Summer_2021
                 List<int> result = new List<int>();
 
                 //Using a for loop, starting at 0 index, loop through the first array incrementing by +1.
-                for (int i = 0 ; i < nums1.Length; i++)
+                for (int i = 0; i < nums1.Length; i++)
                 {
                     //if the element in the second array matches the element in the first array than store the elements within the list.
-                    if(nums2.Contains(nums1[i]))
+                    if (nums2.Contains(nums1[i]))
                     {
                         result.Add(nums1[i]);
                     }
@@ -132,26 +129,26 @@ namespace Programming_Assignment_2_Summer_2021
                 }
 
                 ///*Starting with the elements in the first array at index 0 if element in first array are
-                    // * is smaller than element in the second array then increment i. 
-                    //  This will allows to loop through next elements in the array*/
+                // * is smaller than element in the second array then increment i. 
+                //  This will allows to loop through next elements in the array*/
 
-                    //if (nums1[i] < nums2[j])
-                    //{
-                    //    i++;
-                    //}
+                //if (nums1[i] < nums2[j])
+                //{
+                //    i++;
+                //}
 
-                    ///* Else if element in the first array starting at index 0 is greater than element in the second 
-                    //   array then increment to next element in j. This will allow program to loop through the elements array.*/
-                    //else if (nums1[i] > nums2[j])
-                    //{
-                    //    j++;
-                    //}
+                ///* Else if element in the first array starting at index 0 is greater than element in the second 
+                //   array then increment to next element in j. This will allow program to loop through the elements array.*/
+                //else if (nums1[i] > nums2[j])
+                //{
+                //    j++;
+                //}
 
-                    ////Otherwise if both are same then print the element and increment loop for both i and j.
-                    //else
-                    //{
-                    //    if (nums1[i] == nums2[j])
-                    //        Console.WriteLine();
+                ////Otherwise if both are same then print the element and increment loop for both i and j.
+                //else
+                //{
+                //    if (nums1[i] == nums2[j])
+                //        Console.WriteLine();
 
 
             }
@@ -199,11 +196,11 @@ namespace Programming_Assignment_2_Summer_2021
                 }
 
                 ///prints the position that is less than target becuase that is where the target should be.
-                if(!condition)
+                if (!condition)
                 {
-                    for(int i=0;i<nums.Length;i++)
+                    for (int i = 0; i < nums.Length; i++)
                     {
-                        if(nums[i]>target)
+                        if (nums[i] > target)
                         {
                             return i;
                         }
@@ -252,12 +249,12 @@ namespace Programming_Assignment_2_Summer_2021
                     }
                 }
                 //if not true
-                if(!condition)
+                if (!condition)
                 {
                     return -1;
                 }
 
-                    
+
                 /*step 1: sort the array in ascending order first
                   step 2: loop through the array and use count to count the total of any matching elements in the 
                   array. 
@@ -265,7 +262,7 @@ namespace Programming_Assignment_2_Summer_2021
                   step 4: Once the second array is populated with list of all matching elements loop through the array and 
                   print the largest of them. 
                   step 5: If there are no lukcy integers returned than return -1.*/
-                 
+
                 return -1;
             }
             catch (Exception)
@@ -316,7 +313,7 @@ namespace Programming_Assignment_2_Summer_2021
             try
             {
                 //write your code here.
-               
+
 
 
                 return -1;
@@ -338,16 +335,38 @@ namespace Programming_Assignment_2_Summer_2021
         //Output: "Sao Paulo" 
         //Explanation: Starting at "London" city you will reach "Sao Paulo" city which is the destination city.Your trip consist of: "London" -> "New York" -> "Lima" -> "Sao Paulo".
         /// </summary>
-        public static string DestCity(List<List<string>> paths)
+        public static string DestCity(string[,] paths)
         {
             try
             {
                 //write your code here.
+
+                //Assuming that the first element within the array is the destination city. For example, here we are assuming NY as the dest city. 
+                string destcity = paths[0, 1];
+                //Looping throught the elements presented in the array's. GetLength is a method that will return the total legnth of the array.
+                //We are starting at position 1 because the position at 0 will always be the starting location so we are assuming that will not 
+                //ever be the destination city.
+                for (int i = 1; i < paths.GetLength(0); i++)
+                {
+                    //comparing destination city with other destination city to check if that destination city is present in the array.
+                    //if that destination city is present in the array it will start the loop which is in line 355.
+                    if (destcity == paths[i, 0])
+                    {
+                        //change the destination city
+                        destcity = paths[i, 1];
+                        //make i as zero to start from beginning again
+                        i = 0;
+                    }
+
+                }
+
+                return destcity;
+
                 //Looked up and seems they use hash set (don't really know this)
                 //Steps: My idea is you use the strings of cities and starting with the last one string you look
                 //for matching string in the other sets, if matches than go to the next to last string and do the same
                 //goal is to find a string that does not appear second time starting at the end 
-                
+
                 return "";
             }
             catch (Exception)
@@ -373,7 +392,19 @@ namespace Programming_Assignment_2_Summer_2021
             try
             {
                 //write your code here.
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    int difference = target - nums[i];
+                    if (nums.Contains(difference))
+                    {
+                        int index = Array.FindIndex(nums, c => c == difference);
+                        //int[] indDIff = { difference, index };
+                        Console.WriteLine(index);
+                        Console.WriteLine(i);
+                        break;
+                    }
 
+                }
             }
             catch (Exception)
             {
@@ -441,7 +472,22 @@ namespace Programming_Assignment_2_Summer_2021
             try
             {
                 //write your code here.
+                List<int> finalList = new List<int>();
+                var difference = arr.Length - n;
 
+                for (int i = difference; i < arr.Length; i++)
+                {
+                    finalList.Add(arr[i]);
+                }
+                for (int i = 0; i < difference; i++)
+                {
+                    finalList.Add(arr[i]);
+                }
+                //display output
+                foreach (int val in finalList)
+                {
+                    Console.WriteLine(val);
+                }
             }
             catch (Exception)
             {
