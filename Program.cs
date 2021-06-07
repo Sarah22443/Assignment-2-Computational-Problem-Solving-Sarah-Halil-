@@ -10,14 +10,14 @@ namespace Programming_Assignment_2_Summer_2021
         {
             //Question1:
             Console.WriteLine("Question 1");
-            int[] nums1 = { 1, 2, 2, 1 };
-            int[] nums2 = { 2, 2 };
+            int[] nums1 = { 1, 2, 1 };
+            int[] nums2 = { 4, 2, 7 };
             Intersection(nums1, nums2);
             Console.WriteLine("");
 
             //Question 2 
             Console.WriteLine("Question 2");
-            int[] nums = { 0, 1, 2, 3, 12 };
+            int[] nums = { 0, 1, 2, 3, 12};
             Console.WriteLine("Enter the target number:");
             int target = Int32.Parse(Console.ReadLine());
             int pos = SearchInsert(nums, target);
@@ -106,15 +106,14 @@ namespace Programming_Assignment_2_Summer_2021
         {
             try
             {
-                //write your code here.
-
-                //(Declaration of list) Creation of the final list where output elements will be stored if intersection is met between arrays.
+                //Declare a list - Create a final list where output elements will be stored if intersection is met between arrays.
                 List<int> result = new List<int>();
 
-                //Using a for loop, starting at 0 index, loop through the first array incrementing by +1.
+                //Using a for loop, starting at 0 index which is the beginning of the array loop through elements
+                //in the first array (nums1).
                 for (int i = 0; i < nums1.Length; i++)
                 {
-                    //if the element in the second array matches the element in the first array than store the elements within the list.
+                    //If the element in the second array matches the element in the first array than store the elements within the list.
                     if (nums2.Contains(nums1[i]))
                     {
                         result.Add(nums1[i]);
@@ -122,35 +121,11 @@ namespace Programming_Assignment_2_Summer_2021
 
                 }
 
-                //increment the list within the result and print the results
+                //Increment the results list and return the results.
                 for (int i = 0; i < result.Count; i++)
                 {
                     Console.WriteLine(result[i]);
                 }
-
-                ///*Starting with the elements in the first array at index 0 if element in first array are
-                // * is smaller than element in the second array then increment i. 
-                //  This will allows to loop through next elements in the array*/
-
-                //if (nums1[i] < nums2[j])
-                //{
-                //    i++;
-                //}
-
-                ///* Else if element in the first array starting at index 0 is greater than element in the second 
-                //   array then increment to next element in j. This will allow program to loop through the elements array.*/
-                //else if (nums1[i] > nums2[j])
-                //{
-                //    j++;
-                //}
-
-                ////Otherwise if both are same then print the element and increment loop for both i and j.
-                //else
-                //{
-                //    if (nums1[i] == nums2[j])
-                //        Console.WriteLine();
-
-
             }
             catch (Exception)
             {
@@ -181,37 +156,50 @@ namespace Programming_Assignment_2_Summer_2021
         {
             try
             {
-                //Write your Code here.
+
+
+                //Pseudocode Logic Below:
+                //step 1: loop through array one by one and look for target.
+                //step 2: if target is found then print the index of where target is in the array. 
+                //step 3: if target is not found then print the index position that is less than the target so if target is 0.
+                
+
+                //initialize a variable type bool called 'condition' which is set to false.
                 bool condition = false;
 
-                //Using a for loop, loop through the elements in the array starting at index 0.
+                //use a for loop to loop through the elements in the array starting at index 0.
                 for (int i = 0; i < nums.Length; i++)
                 {
-                    //if array contains the target element than print the element.
+                    //check if array contains the target element. if the array contains the target element hen it will change the
+                    //condition from false to true and will then return the index of the target element.
                     condition = nums.Contains(target);
                     if (condition)
                     {
-                        return i;
+                        return nums.Length;
                     }
                 }
 
-                ///prints the position that is less than target becuase that is where the target should be.
-                if (!condition)
+        //if the condition that was set in the code above in line 167 is not true, then
+        //loop through the array again and this time return the index position that is less than target becuase that is where the target should be.
+        if (!condition)
                 {
-                    for (int i = 0; i < nums.Length; i++)
-                    {
-                        if (nums[i] > target)
-                        {
-                            return i;
-                        }
-                    }
-                }
+                  for (int i = 0; i < nums.Length; i++)
+                {
+                       if (nums[i] > target)
+                             {
+                                return i;
+                             }
+    }
+}
 
-                //step 1: sort the array first in ascending order
-                //step 2: loop through array one by one and look for target.
-                //step 3: if target is found then print the index of where target is in the array. 
-                //and if target is not found than if target is smaller than the element to its left and 
-                //greater than the element to its right print the position of that index. 
+               
+                //    for (int i = 0; i < nums.Length; i++)
+                //    {
+                //        if (nums[i] == target || nums[i] > target) return i;
+                //    }
+                //    return nums.Length;
+                //}
+
                 return -1;
             }
             catch (Exception)
@@ -235,33 +223,36 @@ namespace Programming_Assignment_2_Summer_2021
         {
             try
             {
-                //write your code here.
+                //Pseudocode Logic Below:
+                //step 1: loop through the array and use count to count the total of any matching elements in the array.
+                //step 2: If count of matching elemets are equal to the actual element than print that result in a list.
+                //step 3: Once the list is populated with list of all matching elements loop through the array and 
+                //print the largest element in the list. 
+                //step 4: If there are no lukcy integers returned than return -1.
+
+                //initialize a variable type bool called 'condition' which is set to false.
                 bool condition = false;
 
+                //loop through the array starting at the first index.
                 for (int i = 0; i < nums.Length; i++)
                 {
-                    //arrow function (counting the frequency of element) 
+                    //loop through the entire nums array and check if the element presented in the array
+                    //is equal to the count frequency of that element in the array
                     condition = nums[i] == nums.Count(c => c == nums[i]);
-                    // if true 
+
+                    //if the condition above is comes true (there match in array with element and its frequency)
+                    //then return the index of the element.
                     if (condition)
                     {
                         return nums[i];
                     }
                 }
-                //if not true
+                //if the condition is false, then return -1.
                 if (!condition)
                 {
                     return -1;
                 }
 
-
-                /*step 1: sort the array in ascending order first
-                  step 2: loop through the array and use count to count the total of any matching elements in the 
-                  array. 
-                  step 3: If count of matching elemets are equal to the actual element than print that result in a second array
-                  step 4: Once the second array is populated with list of all matching elements loop through the array and 
-                  print the largest of them. 
-                  step 5: If there are no lukcy integers returned than return -1.*/
 
                 return -1;
             }
@@ -280,18 +271,6 @@ namespace Programming_Assignment_2_Summer_2021
         //•	nums[2 * i] = nums[i]  when 2 <= 2 * i <= n
         //•	nums[2 * i + 1] = nums[i] + nums[i + 1] when 2 <= 2 * i + 1 <= n
         // Return the maximum integer in the array nums.
-
-        //n=3
-        //generate an array of size 4. This means 4 elements shd be present in the array.
-        //nuums[0]=0,
-        //nums[1]=1
-        //nums[2] * 1 = nums[1]=1 
-        //nums[3]=nums[1]+nums[2]=1+1=2
-        //nums[4]
-
-        //initialize an array of size n+1;
-        //assign nums[0]=0 and nums[1]=1
-        //going forward, divide the number by 2. and do nums[coefficient] if id divides by 2 else do nums[coefficient]+nums[coeff+1];
 
         //Example 1:
         //Input: n = 7
@@ -312,11 +291,36 @@ namespace Programming_Assignment_2_Summer_2021
         {
             try
             {
-                //write your code here.
+                //Pseudocode Logic Below:
+                //step 1: initialize an array of size n+1;
+                //step 2: assign nums[0]=0 and nums[1]=1
+                //step 3: going forward, divide the number by 2. and do nums[coefficient] if id divides by 2 else do nums[coefficient]+nums[coeff+1];
 
+                //initialize an array of size n+1 size;
+                int[] resultantArr = new int[n + 1];
 
+                //enter into a for loop with the condition that if index is less than or equal to integer n. 
+                //assign nums[0]=0 and nums[1]=1
 
-                return -1;
+                for (int i = 0; i <= n; i++)
+                {
+                    resultantArr[0] = 0;
+                    resultantArr[1] = 1;
+
+                    //if index is greater then 1, do nums[coefficient]
+                    if (i > 1)
+                    {
+                        //if index does not divide by 2 and there is a remainder then it will
+                        //go to the else statement and do nums[coefficient]+nums[coeff+1]
+                        if (i % 2 == 0)
+                            resultantArr[i] = resultantArr[1 / 2];
+                        else
+                            resultantArr[i] = resultantArr[i / 2] + resultantArr[(i / 2) + 1];
+                    }
+
+                }
+                //returns the maximum value in the resultant array.
+                return resultantArr.Max();
             }
             catch (Exception)
             {
