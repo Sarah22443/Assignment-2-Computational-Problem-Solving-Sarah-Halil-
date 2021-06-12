@@ -17,7 +17,7 @@ namespace Programming_Assignment_2_Summer_2021
 
             //Question 2 
             Console.WriteLine("Question 2");
-            int[] nums = { 0, 1, 2, 3, 12};
+            int[] nums = { 0, 1, 2, 3, 12 };
             Console.WriteLine("Enter the target number:");
             int target = Int32.Parse(Console.ReadLine());
             int pos = SearchInsert(nums, target);
@@ -26,7 +26,7 @@ namespace Programming_Assignment_2_Summer_2021
 
             //Question3
             Console.WriteLine("Question 3");
-            int[] ar3 = { 1, 2, 3, 1, 1, 3 };
+            int[] ar3 = { 1, 2, 3, 1, 1, 3, 3 };
             int Lnum = LuckyNumber(ar3);
             if (Lnum == -1)
                 Console.WriteLine("Given Array doesn't have any lucky Integer");
@@ -82,10 +82,11 @@ namespace Programming_Assignment_2_Summer_2021
 
             //Question 10
             Console.WriteLine("Question 10");
-            int[] costs = { 10, 15, 20 };
+            int[] costs = { 15, 10, 20 };
             int minCost = MinCostToClimb(costs);
             Console.WriteLine("Minium cost to climb the top stair {0}", minCost);
             Console.WriteLine();
+
         }
 
         //Question 1
@@ -109,23 +110,23 @@ namespace Programming_Assignment_2_Summer_2021
                 //Declare a list - Create a final list where output elements will be stored if intersection is met between arrays.
                 List<int> result = new List<int>();
 
-                //Using a for loop, starting at 0 index which is the beginning of the array loop through elements
-                //in the first array (nums1).
+                //Using a for loop, starting at 0 index which is the beginning of the array loop through elements in the first array (nums1).
                 for (int i = 0; i < nums1.Length; i++)
                 {
                     //If the element in the second array matches the element in the first array than store the elements within the list.
-                    if (nums2.Contains(nums1[i]))
+                    if (nums1.Contains(nums2[i]))
                     {
-                        result.Add(nums1[i]);
+                        result.Add(nums2[i]);
                     }
-
                 }
-
                 //Increment the results list and return the results.
                 for (int i = 0; i < result.Count; i++)
                 {
                     Console.WriteLine(result[i]);
                 }
+
+
+
             }
             catch (Exception)
             {
@@ -157,42 +158,51 @@ namespace Programming_Assignment_2_Summer_2021
             try
             {
 
-
                 //Pseudocode Logic Below:
                 //step 1: loop through array one by one and look for target.
                 //step 2: if target is found then print the index of where target is in the array. 
-                //step 3: if target is not found then print the index position that is less than the target so if target is 0.
-                
+                //step 3: if target is not found then print the index position of where target would be had it been placed in the array.
 
-                //initialize a variable type bool called 'condition' which is set to false.
-                bool condition = false;
-
-                //use a for loop to loop through the elements in the array starting at index 0.
+                //Loop through the array starting at index 0
                 for (int i = 0; i < nums.Length; i++)
                 {
-                    //check if array contains the target element. if the array contains the target element hen it will change the
-                    //condition from false to true and will then return the index of the target element.
-                    condition = nums.Contains(target);
-                    if (condition)
+                    //If the target is less than or equal to index, than return the index position.
+                    if (nums[i] >= target)
                     {
-                        return nums.Length;
+                        return i;
                     }
                 }
 
-        //if the condition that was set in the code above in line 167 is not true, then
-        //loop through the array again and this time return the index position that is less than target becuase that is where the target should be.
-        if (!condition)
-                {
-                  for (int i = 0; i < nums.Length; i++)
-                {
-                       if (nums[i] > target)
-                             {
-                                return i;
-                             }
-    }
-}
+                //Below is another code for this question, but it was not getting the correct output result.
 
-               
+                //initialize a variable type bool called 'condition' which is set to false.
+                //bool condition = false;
+
+                //use a for loop to loop through the elements in the array starting at index 0.
+                //for (int i = 0; i < nums.Length; i++)
+                {
+                    //check if array contains the target element. if the array contains the target element hen it will change the
+                    //condition from false to true and will then return the index of the target element.
+                    //    condition = nums.Contains(target);
+                    //    if (condition)
+                    //    {
+                    //        return nums.Length;
+                    //    }
+                    //}
+
+                    ////if the condition that was set in the code above in line 167 is not true, then
+                    ////loop through the array again and this time return the index position that is less than target becuase that is where the target should be.
+                    //if (!condition)
+                    //{
+                    //    for (int i = 0; i < nums.Length; i++)
+                    //    {
+                    //        if (nums[i] > target)
+                    //        {
+                    //            return i;
+                    //        }
+                    //    }
+                    //}
+                }
                 //    for (int i = 0; i < nums.Length; i++)
                 //    {
                 //        if (nums[i] == target || nums[i] > target) return i;
@@ -223,6 +233,7 @@ namespace Programming_Assignment_2_Summer_2021
         {
             try
             {
+
                 //Pseudocode Logic Below:
                 //step 1: loop through the array and use count to count the total of any matching elements in the array.
                 //step 2: If count of matching elemets are equal to the actual element than print that result in a list.
@@ -230,7 +241,7 @@ namespace Programming_Assignment_2_Summer_2021
                 //print the largest element in the list. 
                 //step 4: If there are no lukcy integers returned than return -1.
 
-                //initialize a variable type bool called 'condition' which is set to false.
+                //initialize a variable type bool called 'condition' which is set to false (this is known as 'Loop Operation with Sentinal Value')
                 bool condition = false;
 
                 //loop through the array starting at the first index.
@@ -255,6 +266,7 @@ namespace Programming_Assignment_2_Summer_2021
 
 
                 return -1;
+
             }
             catch (Exception)
             {
@@ -269,7 +281,8 @@ namespace Programming_Assignment_2_Summer_2021
         //•	nums[0] = 0
         //•	nums[1] = 1
         //•	nums[2 * i] = nums[i]  when 2 <= 2 * i <= n
-        //•	nums[2 * i + 1] = nums[i] + nums[i + 1] when 2 <= 2 * i + 1 <= n
+        //•	nums[2 * i + 1] = nums[i] + nums[i + 1] when 2 <= 2 * i + 1 <= n]]
+
         // Return the maximum integer in the array nums.
 
         //Example 1:
@@ -292,9 +305,9 @@ namespace Programming_Assignment_2_Summer_2021
             try
             {
                 //Pseudocode Logic Below:
-                //step 1: initialize an array of size n+1;
+                //step 1: initialize an array of size n+1
                 //step 2: assign nums[0]=0 and nums[1]=1
-                //step 3: going forward, divide the number by 2. and do nums[coefficient] if id divides by 2 else do nums[coefficient]+nums[coeff+1];
+                //step 3: going forward, divide the number by 2. and do nums[coefficient] if id divides by 2 else do nums[coefficient]+nums[coeff+1]
 
                 //initialize an array of size n+1 size;
                 int[] resultantArr = new int[n + 1];
@@ -343,20 +356,21 @@ namespace Programming_Assignment_2_Summer_2021
         {
             try
             {
-                //write your code here.
-
-                //Assuming that the first element within the array is the destination city. For example, here we are assuming NY as the dest city. 
+                //Assuming that the first element within the array is the destination city.
+                //For example, here we are assuming NY as the destination city. 
                 string destcity = paths[0, 1];
-                //Looping throught the elements presented in the array's. GetLength is a method that will return the total legnth of the array.
-                //We are starting at position 1 because the position at 0 will always be the starting location so we are assuming that will not 
-                //ever be the destination city.
+
+                //Loop through the elements presented in the array's. GetLength is a method that will return the total legnth of the two-dimensional array.
+                //We are starting at position 1 because the position at 0 will always be the starting location so we are assuming that
+                //the starting location will not ever be the destination city.
                 for (int i = 1; i < paths.GetLength(0); i++)
                 {
-                    //comparing destination city with other destination city to check if that destination city is present in the array.
-                    //if that destination city is present in the array it will start the loop which is in line 355.
+                    //Compare destcity, which in example above would be NY, with the next city in the array,
+                    //and checks if that next city (next destcity) in the array is equal to the destination city.
+                    //If condition matches the destination city then it will start the loop again.  
                     if (destcity == paths[i, 0])
                     {
-                        //change the destination city
+                        //Change the destination city to the next city in array
                         destcity = paths[i, 1];
                         //make i as zero to start from beginning again
                         i = 0;
@@ -364,6 +378,7 @@ namespace Programming_Assignment_2_Summer_2021
 
                 }
 
+                //returns the destination city 
                 return destcity;
 
                 //Looked up and seems they use hash set (don't really know this)
@@ -371,7 +386,7 @@ namespace Programming_Assignment_2_Summer_2021
                 //for matching string in the other sets, if matches than go to the next to last string and do the same
                 //goal is to find a string that does not appear second time starting at the end 
 
-                return "";
+
             }
             catch (Exception)
             {
@@ -395,16 +410,26 @@ namespace Programming_Assignment_2_Summer_2021
         {
             try
             {
-                //write your code here.
+                //Loop through the array
                 for (int i = 0; i < nums.Length; i++)
                 {
+                    //Create differance variable which is set to be differance
+                    //which is target value minus the elements indexed.
+                    //Using example above the target is 9 and first index is 2 so 9-2 = 7. 
+                    //If 7 exisits within the array then it will make the statement true. 
                     int difference = target - nums[i];
                     if (nums.Contains(difference))
                     {
+                        //Finds the locations of the indexed elements and stores that in variable 'index' 
                         int index = Array.FindIndex(nums, c => c == difference);
-                        //int[] indDIff = { difference, index };
+
+                        //Prints the index of the element in the array with the differance 
                         Console.WriteLine(index);
+
+                        //Prints i which is index 0
                         Console.WriteLine(i);
+
+                        //Breaks out of the loop once index is found.
                         break;
                     }
 
@@ -442,13 +467,58 @@ namespace Programming_Assignment_2_Summer_2021
         {
             try
             {
-                //write your code here.
+                //Create a new dictionary
+                Dictionary<int, List<int>> dict = new Dictionary<int, List<int>>();
 
+                //Loop through the array (use GetLength starting at index 0 since this is a two-dimensional array)
+                for (int i = 0; i < items.GetLength(0); i++)
+                {
+                    //Check the dictionary key items. Search for if the key exists, if the key exists then add the values to the dictionary.
+                    //If if the key does not exist then add the key and value to the dictionary.
+                    if (dict.ContainsKey(items[i, 0]))
+                    {
+                        //Adds elements into the dictionary
+                        dict[items[i, 0]].Add(items[i, 1]);
+                    }
+                    else
+                    {
+                        //Adds elements into the dictionary
+                        dict.Add(items[i, 0], new List<int>());
+                        dict[items[i, 0]].Add(items[i, 1]);
+                    }
+                }
+                //Loop through the dictionary 
+                for (int i = 0; i < dict.Count(); i++)
+                {
+                    //Sorts the values presented in the dictionary in ascending order so will have the highest values presented first.
+                    dict.ElementAt(i).Value.Sort();
+                    dict.ElementAt(i).Value.Reverse();
+
+                    //Takes the top 5 values in dictionary and stores in variable name top5
+                    var top5 = dict.ElementAt(i).Value.Take(5);
+
+                    //Prints the value/key pairs and computes the top average in the dictionary.
+                    //Converts their values of averages into data type integer.
+                    //The {0} and {1} are placeholders, so they will update with the presented key and value pair when code is run.
+                    if (i == 0)
+                    {
+                        Console.Write("[{0},{1}],", dict.ElementAt(i).Key, Convert.ToInt32(top5.Average()));
+                    }
+                    else if (i != dict.Count - 1)
+                    {
+                        Console.Write("[{0},{1}],", dict.ElementAt(i).Key, Convert.ToInt32(top5.Average()));
+                    }
+                    else
+                    {
+                        Console.Write("[{0},{1}]", dict.ElementAt(i).Key, Convert.ToInt32(top5.Average()));
+                    }
+                }
             }
             catch (Exception)
             {
 
                 throw;
+
             }
         }
 
@@ -475,19 +545,27 @@ namespace Programming_Assignment_2_Summer_2021
         {
             try
             {
-                //write your code here.
+                //Create final list we can use to display the results 
                 List<int> finalList = new List<int>();
+
+                //Compute the difference between Length of array and n (n is equal to the k steps).
                 var difference = arr.Length - n;
 
+                //Loop through array starting at the index given in computation of difference
+                //(Note: arr.Length is 7 since we have 7 elements in the array for Q8)
                 for (int i = difference; i < arr.Length; i++)
                 {
+                    //Adds the remaining elements (elements after the differance) in the final list 
                     finalList.Add(arr[i]);
                 }
+
+                //Loops through the array and adds the remaining elements to the list
+                //These will be the elements of index is lower than the differance.
                 for (int i = 0; i < difference; i++)
                 {
                     finalList.Add(arr[i]);
                 }
-                //display output
+                //Displays output
                 foreach (int val in finalList)
                 {
                     Console.WriteLine(val);
@@ -503,24 +581,53 @@ namespace Programming_Assignment_2_Summer_2021
         //Question 9
         /// <summary>
         //Given an integer array nums, find the contiguous subarray(containing at least one number) which has the largest sum and return its sum
-        //Example 1:
-        //Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
-        //Output: 6
-        //Explanation: [4,-1,2,1] has the largest sum = 6.
-        //Example 2:
-        //Input: nums = [1]
-        //Output: 1
-        // Example 3:
+        // Example:
         // Input: nums = [5,4,-1,7,8]
         //Output: 23
         /// </summary>
 
-        private static int MaximumSum(int[] arr)
+        private static int MaximumSum(int[] nums)
         {
             try
             {
-                //write your code here.
-                return 0;
+                {
+                    //Create 2 variables maxSum and maxCurrentArray.
+                    //Starts at index 0 (first element in the array) and will be used to compare with other elements and to find the maximum element in the array.
+                    //Using the array example presented above where Input: nums = [5,4,-1,7,8], 5 will be the value stored for both variables.
+                    int maxSum = nums[0], maxCurrentArray = nums[0];
+
+                    //Use a for loop & initialize starting position at 1 & loop through array
+                    for (int i = 1; i < nums.Length; i++)
+                    {
+
+                        //Going through first the maxCurrentArray using formula where nums[i] which in our loop was initialized to start at index one
+                        //Using the array example presented above where Input: nums = [5,4,-1,7,8], nums[i] = 4, then add maxCurrentArray variable
+                        //which was 5 as in the first line of the code and add the value stored in the maxCurrent array to nums[i] which is 4.
+                        //the fist set of values for maxCurrentArray will be (4, 5+4) therefore 9 is the maxCurrentArray value. 
+                        //loop will continue on to the next element in the array in index 2 and do the same thing. Next to the code below 
+                        //are values that will be output of the formula.
+
+                        maxCurrentArray = Math.Max(nums[i], maxCurrentArray + nums[i]);//max(4,5+4)=9//max(-1,9+-1)=8//max(7,8+7)=15//max(8,15+8)=23
+
+
+                        //Next going through maxSum using formula below, where value for maxSum was initialized to index 0 in the beginning
+                        //so maxSum value first equals 5, and then compare this to the maxCurrentArray value which was populated in the above code
+                        //after comparing these two values output will be the maximum value. 
+
+                        //Continueing with our example from above, first values will be 5 (since this is index 0) and 9 (since this is the output 
+                        //for first element in the maxCurrentArray shown above. Next betweent the 5 & 9 take the maximum value which is 9. 
+                        //Next move to next sets of maxSum and maxCurrentArray. Now maxSum which now is 9, and maxCurrentArray which shown above is
+                        //now 8, between 9 & 8 take the maximum value which is 9. Loop through the entire values while taking out the maximum value and 
+                        //output will result in the maximum value between the maxSum and maxCurrentArray.
+
+                        maxSum = Math.Max(maxSum, maxCurrentArray);//max(5,9)=9//max(9,8)=9//max(9,15)=15//max(15,23)=23//max=(23)
+
+                    }
+
+                    //return the maxSum value 
+                    return maxSum;
+
+                }
             }
             catch (Exception)
             {
@@ -545,8 +652,31 @@ namespace Programming_Assignment_2_Summer_2021
         {
             try
             {
-                //write your code here.
-                return 0;
+
+                //Loop through the array starting at index 2
+                for (int i = 2; i < costs.Length; i++)
+                {
+                    //Use a minimum math method to calculate the cost, this method will review the prior step and prior 2 steps
+                    //whichever is less of the two will be the output
+                    costs[i] += Math.Min(costs[i - 1], costs[i - 2]);
+                }
+
+                //returns minimum cost
+                return costs.Min();
+
+
+                //Pseudocode Logic Below:
+                //This problem includes dynamic programming (programming that computes its solution by combining them from smaller subsolutions,
+                //and trying many choices to figure out an optimal set of choices).
+
+                //step 1: Loop through array.
+                //step 2: There will be two options presented each time to get to the top while paying the cheapest price.
+                //Option one = take first step and pay cost, skip second step
+                //Option two = take second step and pay cost, skip first step
+                //step 3: To solve, loop through the array and check for next two values in the array while choosing the step with the
+                //lower value. This can be done with minimum value method
+                //Also note that code will need to record which locations (indexes) it took the step to maintain a record of path)
+                //step 4: return the lowest value and record 
 
             }
             catch (Exception)
